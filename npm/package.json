@@ -1,16 +1,20 @@
 {
-	"name": "janus",
+	"name": "qnzs-janus",
+	"version": "1.0.11",
 	"description": "The Janus WebRTC Server",
 	"author": "Meetecho",
-	"license": "GPL-3.0",
-	"repository": "github:meetecho/janus-gateway",
+	"type": "module",
+	"main": "es/index.js",
+	"module": "es/index.js",
 	"types": "janus.d.ts",
 	"typings": "janus.d.ts",
+	"license": "MIT",
 	"scripts": {
-		"rollup": "rollup -c rollup.config.js"
+		"rollup": "rollup -c rollup.config.js --f es --o ./es/index.js"
 	},
 	"devDependencies": {
-		"rollup": "^0.50.0",
-		"rollup-plugin-replace": "^2.0.0"
+		"@rollup/plugin-replace": "^5.0.2",
+		"@rollup/plugin-terser": "^0.4.1",
+		"rollup": "^3.21.0"
 	}
 }

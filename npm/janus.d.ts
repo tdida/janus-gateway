@@ -1,5 +1,5 @@
 declare global {
-	const jQuery: any
+	const jQuery: any;
 }
 
 declare namespace JanusJS {
@@ -29,46 +29,46 @@ declare namespace JanusJS {
 	}
 
 	type ChromeExtension = {
-		cache?: { [key in string]: GetScreenCallback },
+		cache?: { [key in string]: GetScreenCallback };
 		extensionId: string;
 		isInstalled: () => boolean;
 		getScreen: (callback: GetScreenCallback) => void;
 		init: () => void;
-	}
+	};
 
-	type GetScreenCallback = (error?, sourceId?) => void
+	type GetScreenCallback = (error?, sourceId?) => void;
 
 	type HttpApiCallOption = {
-		async: boolean,
-		verb: string,
-		body: JanusRequest,
-		timeout: number,
-		withCredentials: boolean,
-		success: (result: unknown) => void,
-		error: (error: string, reason?: unknown) => void,
-	}
+		async: boolean;
+		verb: string;
+		body: JanusRequest;
+		timeout: number;
+		withCredentials: boolean;
+		success: (result: unknown) => void;
+		error: (error: string, reason?: unknown) => void;
+	};
 
 	type JanusRequest = {
-		plugin?: string,
-		token?: string,
-		apisecret?: string,
-		session_id?: number,
-		handle_id?: number,
-		opaque_id?: string,
-		loop_index?: number,
-		janus: string,
-		transaction: string,
-		body?: any,
-		jsep?: JSEP,
-	}
+		plugin?: string;
+		token?: string;
+		apisecret?: string;
+		session_id?: number;
+		handle_id?: number;
+		opaque_id?: string;
+		loop_index?: number;
+		janus: string;
+		transaction: string;
+		body?: any;
+		jsep?: JSEP;
+	};
 
 	enum DebugLevel {
-		Trace = 'trace',
-		vDebug = 'vdebug',
-		Debug = 'debug',
-		Log = 'log',
-		Warning = 'warn',
-		Error = 'error',
+		Trace = "trace",
+		vDebug = "vdebug",
+		Debug = "debug",
+		Log = "log",
+		Warning = "warn",
+		Error = "error",
 	}
 
 	interface JSEP {
@@ -80,7 +80,7 @@ declare namespace JanusJS {
 	}
 
 	interface InitOptions {
-		debug?: boolean | 'all' | DebugLevel[];
+		debug?: boolean | "all" | DebugLevel[];
 		callback?: Function;
 		dependencies?: DependenciesResult;
 	}
@@ -122,13 +122,13 @@ declare namespace JanusJS {
 	}
 
 	enum MessageType {
-		Recording = 'recording',
-		Starting = 'starting',
-		Started = 'started',
-		Stopped = 'stopped',
-		SlowLink = 'slow_link',
-		Preparing = 'preparing',
-		Refreshing = 'refreshing'
+		Recording = "recording",
+		Starting = "starting",
+		Started = "started",
+		Stopped = "stopped",
+		SlowLink = "slow_link",
+		Preparing = "preparing",
+		Refreshing = "refreshing",
 	}
 
 	interface Message {
@@ -146,9 +146,15 @@ declare namespace JanusJS {
 		success?: (handle: PluginHandle) => void;
 		error?: (error: string) => void;
 		consentDialog?: (on: boolean) => void;
-		webrtcState?: (isConnected: boolean) => void;
-		iceState?: (state: 'connected' | 'failed' | 'disconnected' | 'closed') => void;
-		mediaState?: (medium: 'audio' | 'video', receiving: boolean, mid?: number) => void;
+		webrtcState?: (isConnected: boolean, message?: string) => void;
+		iceState?: (
+			state: "connected" | "failed" | "disconnected" | "closed"
+		) => void;
+		mediaState?: (
+			medium: "audio" | "video",
+			receiving: boolean,
+			mid?: number
+		) => void;
 		slowLink?: (uplink: boolean, lost: number, mid: string) => void;
 		onmessage?: (message: Message, jsep?: JSEP) => void;
 		onlocaltrack?: (track: MediaStreamTrack, on: boolean) => void;
@@ -176,12 +182,12 @@ declare namespace JanusJS {
 			video?:
 				| boolean
 				| { deviceId: string }
-				| 'lowres'
-				| 'lowres-16:9'
-				| 'stdres'
-				| 'stdres-16:9'
-				| 'hires'
-				| 'hires-16:9';
+				| "lowres"
+				| "lowres-16:9"
+				| "stdres"
+				| "stdres-16:9"
+				| "hires"
+				| "hires-16:9";
 			data?: boolean;
 			failIfNoAudio?: boolean;
 			failIfNoVideo?: boolean;
@@ -215,7 +221,7 @@ declare namespace JanusJS {
 		dataChannel: { [key in string]: RTCDataChannel };
 		dataChannelOptions: RTCDataChannelInit;
 
-		dtmfSender: RTCDTMFSender
+		dtmfSender: RTCDTMFSender;
 		iceDone: boolean;
 		mediaConstraints: any;
 		mySdp: {
@@ -242,46 +248,46 @@ declare namespace JanusJS {
 			timer: number;
 		};
 
-		sdpSent: boolean,
-		insertableStreams?: any,
-		candidates: RTCIceCandidateInit[],
+		sdpSent: boolean;
+		insertableStreams?: any;
+		candidates: RTCIceCandidateInit[];
 	}
 
 	type PluginCreateAnswerParam = {
 		jsep: JSEP;
-		media: { audioSend: any, videoSend: any };
+		media: { audioSend: any; videoSend: any };
 		success?: (data: JSEP) => void;
 		error?: (error: string) => void;
-	}
+	};
 
 	type PluginHandleRemoteJsepParam = {
 		jsep: JSEP;
 		success?: (data: JSEP) => void;
 		error?: (error: string) => void;
-	}
+	};
 
 	type PluginReplaceTracksParam = {
 		tracks: TrackOption[];
 		success?: (data: unknown) => void;
 		error?: (error: string) => void;
-	}
+	};
 
 	type TrackOption = {
 		add: boolean;
 		replace: boolean;
 		remove: boolean;
-		type: 'video' | 'screen' | 'audio' | 'data';
+		type: "video" | "screen" | "audio" | "data";
 		mid: string;
 		capture: boolean | MediaStreamTrack;
 		recv: boolean;
-		group: 'default' | string;
-		gumGroup: TrackOption['group'];
+		group: "default" | string;
+		gumGroup: TrackOption["group"];
 		simulcast: boolean;
 		svc: string;
 		simulcastMaxBitrates: {
-			low: number,
-			medium: number,
-			high: number,
+			low: number;
+			medium: number;
+			high: number;
 		};
 		sendEncodings: RTCRtpEncodingParameters;
 		framerate: number;
@@ -291,31 +297,31 @@ declare namespace JanusJS {
 			sender: ReadableWritablePair;
 			receiver: ReadableWritablePair;
 		};
-	}
+	};
 
 	type PluginDtmfParam = {
 		dtmf: Dtmf;
 		success?: (data: unknown) => void;
 		error?: (error: string) => void;
-	}
+	};
 
 	type Dtmf = {
 		tones: string;
-		duration: number;
-		gap: number;
-	}
+		duration?: number;
+		gap?: number;
+	};
 
 	type PluginDataParam = {
 		success?: (data: unknown) => void;
 		error?: (error: string) => void;
-	}
+	};
 
 	type TrackDesc = {
-		mid?: string
-		type?: string
-		id?: string
-		label?: string
-	}
+		mid?: string;
+		type?: string;
+		id?: string;
+		label?: string;
+	};
 
 	interface DetachOptions {
 		success?: () => void;
@@ -358,8 +364,12 @@ declare namespace JanusJS {
 	class Janus {
 		static webRTCAdapter: any;
 		static safariVp8: boolean;
-		static useDefaultDependencies(deps?: Partial<DefaultDependencies>): DependenciesResult;
-		static useOldDependencies(deps?: Partial<OldDependencies>): DependenciesResult;
+		static useDefaultDependencies(
+			deps?: Partial<DefaultDependencies>
+		): DependenciesResult;
+		static useOldDependencies(
+			deps?: Partial<OldDependencies>
+		): DependenciesResult;
 		static init(options: InitOptions): void;
 		static isWebrtcSupported(): boolean;
 		static debug(...args: any[]): void;
@@ -367,8 +377,14 @@ declare namespace JanusJS {
 		static warn(...args: any[]): void;
 		static error(...args: any[]): void;
 		static randomString(length: number): string;
-		static attachMediaStream(element: HTMLMediaElement, stream: MediaStream): void;
-		static reattachMediaStream(to: HTMLMediaElement, from: HTMLMediaElement): void;
+		static attachMediaStream(
+			element: HTMLMediaElement,
+			stream: MediaStream
+		): void;
+		static reattachMediaStream(
+			to: HTMLMediaElement,
+			from: HTMLMediaElement
+		): void;
 
 		static stopAllTracks(stream: MediaStream): void;
 
